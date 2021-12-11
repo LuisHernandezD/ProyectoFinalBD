@@ -28,11 +28,126 @@ public class Ventas extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        agregarV = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        modificarV = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        mostrarV = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Seleccione la opcion a realizar");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 400, -1));
+
+        jPanel2.setBackground(new java.awt.Color(12, 78, 140));
+
+        agregarV.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        agregarV.setForeground(new java.awt.Color(255, 255, 255));
+        agregarV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        agregarV.setText("Agregar");
+        agregarV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        agregarV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                agregarVMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(agregarV, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(agregarV, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 160, -1));
+
+        jPanel3.setBackground(new java.awt.Color(12, 129, 228));
+
+        modificarV.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        modificarV.setForeground(new java.awt.Color(255, 255, 255));
+        modificarV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        modificarV.setText("Modificar");
+        modificarV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modificarVMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(modificarV, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(modificarV, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 160, -1));
+
+        jPanel4.setBackground(new java.awt.Color(17, 196, 212));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("Ventas");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(339, 339, 339)
+                .addComponent(jLabel2)
+                .addContainerGap(340, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 760, 60));
+
+        jPanel5.setBackground(new java.awt.Color(184, 216, 224));
+
+        mostrarV.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        mostrarV.setForeground(new java.awt.Color(255, 255, 255));
+        mostrarV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mostrarV.setText("Mostrar");
+        mostrarV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mostrarV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarVMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mostrarV, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mostrarV, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 170, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -42,17 +157,43 @@ public class Ventas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void agregarVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarVMouseClicked
+        VentasAgr ventana = new VentasAgr();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_agregarVMouseClicked
+
+    private void modificarVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarVMouseClicked
+        VentasMod ventana = new VentasMod();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_modificarVMouseClicked
+
+    private void mostrarVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarVMouseClicked
+        VentasMost ventana = new VentasMost();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_mostrarVMouseClicked
 
     /**
      * @param args the command line arguments
      */
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel agregarV;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel modificarV;
+    private javax.swing.JLabel mostrarV;
     // End of variables declaration//GEN-END:variables
 }

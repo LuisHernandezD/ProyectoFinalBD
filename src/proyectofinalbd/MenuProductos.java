@@ -131,6 +131,7 @@ public class MenuProductos extends javax.swing.JFrame {
         mostrarB.setForeground(new java.awt.Color(255, 255, 255));
         mostrarB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mostrarB.setText("Mostrar");
+        mostrarB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mostrarB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mostrarBMouseClicked(evt);
