@@ -15,8 +15,8 @@ public class ProyectoFinalBD {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Menu menuu = new Menu();
-        menuu.setVisible(true);
+        Menu menuuu = new Menu();
+        menuuu.setVisible(true);
     }
     
 }
