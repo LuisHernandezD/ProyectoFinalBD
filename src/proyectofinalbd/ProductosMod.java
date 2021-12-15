@@ -5,6 +5,12 @@
  */
 package proyectofinalbd;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 /**
  *
  * @author LuFitz
@@ -43,10 +49,12 @@ public class ProductosMod extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        productomodB = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -105,20 +113,25 @@ public class ProductosMod extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(241, 203, 181));
 
-        jLabel7.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Modificar");
+        productomodB.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        productomodB.setForeground(new java.awt.Color(255, 255, 255));
+        productomodB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        productomodB.setText("Modificar");
+        productomodB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productomodBMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+            .addComponent(productomodB, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(productomodB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, 180, -1));
@@ -152,6 +165,30 @@ public class ProductosMod extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void productomodBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productomodBMouseClicked
+        if (evt.getSource() == productomodB) {
+            try {
+                Modificar();
+            } catch (ClassNotFoundException | SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_productomodBMouseClicked
+    
+    public void Modificar() throws ClassNotFoundException, SQLException{
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String connectionURL = "jdbc:sqlserver://DESKTOP-NT1UVST\\BDATOS:1433;databaseName=ProyectoFinalBD;user=usuarioSQL;password=fitz;";
+        Connection con = DriverManager.getConnection(connectionURL);
+        System.out.println("Nos conectamos");
+
+        int id = Integer.parseInt(idp.getText());
+        String nombre = String.valueOf(nomp.getText());
+        int precio = Integer.parseInt(preciop.getText());
+        int estatus = Integer.parseInt(estp.getText());
+        Statement instruccion = con.createStatement();
+        instruccion.execute("exec dbo.productoModificar " + id + "," + nombre + "," + precio + "," + estatus + "");
+        JOptionPane.showMessageDialog(this, "Producto Modificado");
+    }
     /**
      * @param args the command line arguments
      */
@@ -166,7 +203,6 @@ public class ProductosMod extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -176,5 +212,6 @@ public class ProductosMod extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField nomp;
     private javax.swing.JTextField preciop;
+    private javax.swing.JLabel productomodB;
     // End of variables declaration//GEN-END:variables
 }

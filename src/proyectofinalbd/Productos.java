@@ -5,10 +5,12 @@
  */
 package proyectofinalbd;
 
-/**
- *
- * @author LuFitz
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 public class Productos extends javax.swing.JFrame {
 
     /**
@@ -132,9 +134,27 @@ public class Productos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarBMouseClicked
-        
+        if (evt.getSource() == agregarB) {
+            try {
+                Agregar();
+            } catch (ClassNotFoundException | SQLException ex) {
+                ex.printStackTrace();
+            }
+        } 
     }//GEN-LAST:event_agregarBMouseClicked
 
+    public void Agregar() throws ClassNotFoundException, SQLException{
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String connectionURL = "jdbc:sqlserver://DESKTOP-NT1UVST\\BDATOS:1433;databaseName=ProyectoFinalBD;user=usuarioSQL;password=fitz;";
+        Connection con = DriverManager.getConnection(connectionURL);
+        System.out.println("Nos conectamos");
+
+        String nombre = String.valueOf(nombrep.getText());
+        int precio = Integer.parseInt(preciop.getText());
+        Statement instruccion = con.createStatement();
+        instruccion.execute("exec dbo.productoAgregar " + nombre + "," + precio );
+        JOptionPane.showMessageDialog(this, "Producto Agregado");
+    }
     /**
      * @param args the command line arguments
      */

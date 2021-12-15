@@ -5,6 +5,14 @@
  */
 package proyectofinalbd;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author LuFitz
@@ -36,6 +44,8 @@ public class ProductosMost extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,9 +131,41 @@ public class ProductosMost extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mostrarBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarBMouseClicked
-        
+        if (evt.getSource() == mostrarB) {
+            try {
+                MostrarProductos();
+            } catch (ClassNotFoundException | SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_mostrarBMouseClicked
+    
+    public void MostrarProductos() throws ClassNotFoundException, SQLException{
+        
+        DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+        modeloTabla.setRowCount(0);
+        
+        
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String connectionURL = "jdbc:sqlserver://DESKTOP-NT1UVST\\BDATOS:1433;databaseName=ProyectoFinalBD;user=usuarioSQL;password=fitz;";
+        Connection con = DriverManager.getConnection(connectionURL);
+        System.out.println("Nos conectamos");
 
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery("exec dbo.productoMostrar");
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnas = rsmd.getColumnCount();
+
+        while (rs.next()) {
+            Object[] fila = new Object[columnas];
+            for (int i = 0; i < columnas; i++) {
+                fila[i] = rs.getObject(i + 1);
+            }
+            modeloTabla.addRow(fila);
+
+        }
+        JOptionPane.showMessageDialog(this, "Mostrado");
+    }
     /**
      * @param args the command line arguments
      */

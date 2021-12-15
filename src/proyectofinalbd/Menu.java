@@ -41,7 +41,7 @@ public class Menu extends javax.swing.JFrame {
         sucursalesP = new javax.swing.JPanel();
         sucursalesB = new javax.swing.JLabel();
         salirP = new javax.swing.JPanel();
-        salirB = new javax.swing.JLabel();
+        DetalleVentas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -178,15 +178,15 @@ public class Menu extends javax.swing.JFrame {
 
         salirP.setBackground(new java.awt.Color(239, 216, 203));
 
-        salirB.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        salirB.setForeground(new java.awt.Color(255, 255, 255));
-        salirB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        salirB.setText("Salir");
-        salirB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        salirB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        salirB.addMouseListener(new java.awt.event.MouseAdapter() {
+        DetalleVentas.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        DetalleVentas.setForeground(new java.awt.Color(255, 255, 255));
+        DetalleVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DetalleVentas.setText("Detalle Ventas");
+        DetalleVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        DetalleVentas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        DetalleVentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                salirBMouseClicked(evt);
+                DetalleVentasMouseClicked(evt);
             }
         });
 
@@ -194,23 +194,24 @@ public class Menu extends javax.swing.JFrame {
         salirP.setLayout(salirPLayout);
         salirPLayout.setHorizontalGroup(
             salirPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(salirB, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+            .addComponent(DetalleVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         salirPLayout.setVerticalGroup(
             salirPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(salirB, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+            .addComponent(DetalleVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        background.add(salirP, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, -1, -1));
+        background.add(salirP, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 510, 180, -1));
 
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 590));
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 640));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void salirBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirBMouseClicked
-       System.exit(0);
-    }//GEN-LAST:event_salirBMouseClicked
+    private void DetalleVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DetalleVentasMouseClicked
+       DetalleVentas ventana = new DetalleVentas();
+       ventana.setVisible(true);
+    }//GEN-LAST:event_DetalleVentasMouseClicked
 
     private void productosBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productosBMouseClicked
         MenuProductos ventana = new MenuProductos();
@@ -238,6 +239,7 @@ public class Menu extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel DetalleVentas;
     private javax.swing.JPanel background;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -247,7 +249,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel productosP;
     private javax.swing.JLabel reportesB;
     private javax.swing.JPanel reportesP;
-    private javax.swing.JLabel salirB;
     private javax.swing.JPanel salirP;
     private javax.swing.JLabel sucursalesB;
     private javax.swing.JPanel sucursalesP;

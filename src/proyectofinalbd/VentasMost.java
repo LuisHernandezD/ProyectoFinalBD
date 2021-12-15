@@ -5,6 +5,14 @@
  */
 package proyectofinalbd;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author LuFitz
@@ -36,6 +44,8 @@ public class VentasMost extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -54,7 +64,7 @@ public class VentasMost extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Folio Venta", "ID Sucursal", "Subtotal", "IVA", "Total", "FechaVenta"
+                "Folio Venta", "Subtotal", "IVA", "Total", "FechaVenta", "ID Sucursal"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -119,16 +129,47 @@ public class VentasMost extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void mostrarVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarVMouseClicked
-
+        if (evt.getSource() == mostrarV) {
+            try {
+                MostrarVentas();
+            } catch (ClassNotFoundException | SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_mostrarVMouseClicked
 
+    public void MostrarVentas() throws ClassNotFoundException, SQLException{
+        DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+        modeloTabla.setRowCount(0);
+        
+        
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String connectionURL = "jdbc:sqlserver://DESKTOP-NT1UVST\\BDATOS:1433;databaseName=ProyectoFinalBD;user=usuarioSQL;password=fitz;";
+        Connection con = DriverManager.getConnection(connectionURL);
+        System.out.println("Nos conectamos");
+
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery("exec dbo.ventaMostrar");
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnas = rsmd.getColumnCount();
+
+        while (rs.next()) {
+            Object[] fila = new Object[columnas];
+            for (int i = 0; i < columnas; i++) {
+                fila[i] = rs.getObject(i + 1);
+            }
+            modeloTabla.addRow(fila);
+
+        }
+        JOptionPane.showMessageDialog(this, "Mostrado");
+    }
     /**
      * @param args the command line arguments
      */

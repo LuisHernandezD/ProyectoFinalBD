@@ -5,6 +5,12 @@
  */
 package proyectofinalbd;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 /**
  *
  * @author LuFitz
@@ -44,6 +50,8 @@ public class VentasMod extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -91,6 +99,12 @@ public class VentasMod extends javax.swing.JFrame {
         modificarV.setForeground(new java.awt.Color(255, 255, 255));
         modificarV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         modificarV.setText("Modificar");
+        modificarV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modificarVMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -137,12 +151,35 @@ public class VentasMod extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void modificarVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarVMouseClicked
+        if (evt.getSource() == modificarV) {
+            try {
+                ModificarVenta();
+            } catch (ClassNotFoundException | SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_modificarVMouseClicked
+
+    public void ModificarVenta() throws ClassNotFoundException, SQLException{
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String connectionURL = "jdbc:sqlserver://DESKTOP-NT1UVST\\BDATOS:1433;databaseName=ProyectoFinalBD;user=usuarioSQL;password=fitz;";
+        Connection con = DriverManager.getConnection(connectionURL);
+        System.out.println("Nos conectamos");
+
+        int folio = Integer.parseInt(folioV.getText());
+        int idsucursal = Integer.parseInt(idSuc.getText());
+        int subtotal = Integer.parseInt(subtotV.getText());
+        Statement instruccion = con.createStatement();
+        instruccion.execute("exec dbo.ventaModificar " + folio + "," + subtotal + "," + idsucursal + "");
+        JOptionPane.showMessageDialog(this, "Venta Modificada");
+    }
     /**
      * @param args the command line arguments
      */

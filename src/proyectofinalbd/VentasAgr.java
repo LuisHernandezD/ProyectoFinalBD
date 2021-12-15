@@ -5,6 +5,12 @@
  */
 package proyectofinalbd;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 /**
  *
  * @author LuFitz
@@ -40,6 +46,8 @@ public class VentasAgr extends javax.swing.JFrame {
         agregarB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -128,16 +136,34 @@ public class VentasAgr extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarBMouseClicked
-
+        if (evt.getSource() == agregarB) {
+            try {
+                AgregarVenta();
+            } catch (ClassNotFoundException | SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_agregarBMouseClicked
 
+    public void AgregarVenta() throws ClassNotFoundException, SQLException{
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String connectionURL = "jdbc:sqlserver://DESKTOP-NT1UVST\\BDATOS:1433;databaseName=ProyectoFinalBD;user=usuarioSQL;password=fitz;";
+        Connection con = DriverManager.getConnection(connectionURL);
+        System.out.println("Nos conectamos");
+
+        int subtotal = Integer.parseInt(subtotV.getText());
+        int idsucursal = Integer.parseInt(idSuc.getText());
+        Statement instruccion = con.createStatement();
+        instruccion.execute("exec dbo.agregarVentaTest " + subtotal + "," + idsucursal );
+        JOptionPane.showMessageDialog(this, "Venta Agregada");
+    }
     /**
      * @param args the command line arguments
      */
